@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<h3>Add Desk</h3>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form|as_crispy_errors }}
+    <div class="form-row">
+      <div class="form-group col-md-4 mb-0">
+        {{ form.office|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-2 mb-0">
+        {{ form.deskCount|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-2 mb-0">
+        {{ form.isOccupied|as_crispy_field }}
+      </div>
+    </div>
+    
+    <div class="form-row">
+      
+        <div class="form-group col-md-3 mb-0">
+            {{ form.adminOffice|as_crispy_field }}
+        </div>
+        <div class="form-group col-md-1 mb-0">
+            {{ form.lengthDesk|as_crispy_field }}
+        </div>
+        <div class="form-group col-md-1 mb-0">
+            {{ form.widthDesk|as_crispy_field }}
+        </div>
+          
+    </div>
+        <input type="submit" class="btn btn-success">
+    
+    </form> 
+
+{% endblock content %}

@@ -1,13 +1,13 @@
 from django import http
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse
+from django.http.response import HttpResponse, JsonResponse
 from .models import Cladire, Office, Desk, Employee, Remote
 from .forms import CladireForm, OfficeForm, DeskForm, EmployeeForm, RemoteForm
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from rest_framework import status
-from .serializers import *
+from .serializers import CladireSerializer, OfficeSerializer, DeskSerializer, EmployeeSerializer, RemoteSerializer
 
 
 def index(request):
@@ -324,11 +324,22 @@ def apiDesks(request):
     return Response(serializer.data)
 
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def apiEmployees(request):
-    employees = Employee.objects.all()
-    serializer = EmployeeSerializer(employees, many=True)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        employees = Employee.objects.all()
+        serializer = EmployeeSerializer(employees, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        employee_serializer = EmployeeSerializer(data=request.data)
+        # print(request.data)
+        # employee_data = JSONParser().parse(request)
+        # employee_serializer = EmployeeSerializer(data=employee_data)
+        if employee_serializer.is_valid():
+            employee_serializer.save()
+            return JsonResponse(employee_serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(employee_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET'])

@@ -1,8 +1,8 @@
-from dataclasses import fields
+from dataclasses import field, fields
 from django import forms
 from django.forms import ModelForm, TextInput, EmailInput, CheckboxInput, DateInput, DateField, BooleanField
 from .models import Cladire, Office, Desk, Employee, Remote
-from django.utils.translation import ugettext_lazy as _
+# from django.utils.translation import ugettext_lazy as _
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Div, Submit, HTML, Button, Row, Field, Column
@@ -115,7 +115,7 @@ class EmployeeForm(ModelForm):
     class Meta:
         model = Employee
         fields = ('firstName', 'lastName', 'role', 'gender',
-                  'birthDate', 'nationality', 'address', 'isActive')
+                  'birthDate', 'nationality', 'address', 'desk',  'isActive')
         labels = {
             'firstName': ('First name'),
             'lastName': ('Last name'),
@@ -124,6 +124,7 @@ class EmployeeForm(ModelForm):
             'birthDate': ('Birth date'),
             'nationality': ('nationality'),
             'address': ('Address'),
+            'desk': ('Desk'),
             'isActive': ('Active')
         }
 
@@ -139,6 +140,7 @@ class EmployeeForm(ModelForm):
             Field('birthDate'),
             Field('nationality'),
             Field('address'),
+            Field('desk'),
             Field('isActive'),
             Submit('submit', 'Submit obiect', css_class='btn-success')
         )
@@ -148,12 +150,14 @@ class EmployeeForm(ModelForm):
 class RemoteForm(ModelForm):
     class Meta:
         model = Remote
-        fields = ('employee', 'startDate', 'duration', 'isApproved')
+        fields = ('employee', 'startDate', 'duration',
+                  'isApproved', 'approvedBy')
         labels = {
             'employee': ('Employee'),
             'startDate': ('Start Date'),
             'duration': ('Duration'),
-            'isApproved': ('Approved')
+            'isApproved': ('Approved'),
+            'approvedBy': ('Approved By')
         }
 
     @property
@@ -165,6 +169,7 @@ class RemoteForm(ModelForm):
             Field('startDate'),
             Field('duration'),
             Field('isApproved'),
+            Field('approvedBy')
 
         )
         return helper

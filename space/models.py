@@ -1,3 +1,4 @@
+from secrets import choice
 from django.db import models
 from django.forms import CharField, DateTimeField
 import uuid
@@ -39,7 +40,6 @@ class Desk(models.Model):
     lengthDesk = models.IntegerField(null=True, blank=True)
     widthDesk = models.IntegerField(null=True, blank=True)
     isOccupied = models.BooleanField()
-    # occupiedBy=
 
 
 class Employee(models.Model):
@@ -48,12 +48,20 @@ class Employee(models.Model):
         ('FEMALE', 'Female'),
         ('NONBINARY', 'Nonbinary'),
     ]
+
+    ROLES = [
+        ('ADMIN', 'Admin'),
+        ('OFFICEADMIN', 'Ofice Admin'),
+        ('USER', 'User'),
+    ]
     idEmployee = models.AutoField(primary_key=True)
     firstName = models.CharField(max_length=50, null=False, blank=False)
     lastName = models.CharField(max_length=50, null=False, blank=False)
-    role = models.CharField(max_length=50, null=True, blank=True)
+    role = models.CharField(
+        max_length=50, choices=ROLES, null=True, blank=True)
     gender = models.CharField(
         max_length=20, choices=STATUS, null=True, blank=True)
+    desk = models.ForeignKey('Desk', on_delete=models.CASCADE)
     birthDate = models.DateField(null=True, blank=True)
     nationality = models.CharField(max_length=50, null=True, blank=True)
     address = models.CharField(max_length=200, null=True, blank=True)
@@ -69,4 +77,4 @@ class Remote(models.Model):
     startDate = models.DateField(null=True, blank=True)
     duration = models.IntegerField(null=True, blank=True)
     isApproved = models.BooleanField()
-    # approvedBy=
+    approvedBy = models.CharField(max_length=30, choices=Employee.ROLES)

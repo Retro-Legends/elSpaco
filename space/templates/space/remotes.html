@@ -1,0 +1,37 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h1>Remotes</h1>
+<hr>
+<a href="{% url 'create-remote' %}">Adauga Remote</a>
+<hr>
+
+<table>
+    <tr>
+        <th>Cod</th>
+        <th>Angajat</th>
+        <th>Data</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+
+    </tr>
+    {% for remote in remotes %}
+    <tr>
+        <td>{{remote.idRemote}}</td>
+        <td>{{remote.employee}}</td>
+        <td>{{employee.startDate}}</td>
+        <td>|</td>
+        <td><a href="{% url 'update-remote' remote.idRemote %}" >Editare</a></td>
+        <td><a href="{% url 'delete-remote' remote.idRemote %}" >Stergere</a></td>
+        <td><a href="{% url 'remote' remote.idRemote %}" target="_blank">Vizualizare</a></td>
+    </tr>
+    
+
+    {% endfor %}
+
+</table>
+
+{% endblock content %}

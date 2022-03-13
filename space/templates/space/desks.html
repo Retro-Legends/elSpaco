@@ -1,0 +1,37 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h1>Desks</h1>
+<hr>
+<a href="{% url 'create-desk' %}">Adauga Desk</a>
+<hr>
+
+<table>
+    <tr>
+        <th>Cod</th>
+        <th>Birou</th>
+        <th>Nr birouri</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+
+    </tr>
+    {% for desk in desks %}
+    <tr>
+        <td>{{desk.idDesk}}</td>
+        <td>{{desk.office}}</td>
+        <td>{{desk.deskCount}}</td>
+        <td>|</td>
+        <td><a href="{% url 'update-desk' desk.idDesk %}" >Editare</a></td>
+        <td><a href="{% url 'delete-desk' desk.idDesk %}" >Stergere</a></td>
+        <td><a href="{% url 'desk' desk.idDesk %}" target="_blank">Vizualizare</a></td>
+    </tr>
+    
+
+    {% endfor %}
+
+</table>
+
+{% endblock content %}

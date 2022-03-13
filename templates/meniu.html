@@ -1,0 +1,16 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{% url 'index' %}">elSpaco</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" href="{% url 'cladiri' %}">Buildings <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="{% url 'birouri' %}">Offices</a>
+        <a class="nav-item nav-link" href="{% url 'desks' %}">Desks</a>
+        <a class="nav-item nav-link" href="{% url 'employees' %}">Employees</a>
+        <a class="nav-item nav-link" href="{% url 'remotes' %}">Remotes</a>
+      </div>
+    </div>
+  </nav>
+  <hr>

@@ -1,0 +1,13 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<h1>{{employee.firstName}} - {{employee.lastName}}</h1>
+<hr>
+<!-- {% for tag in tags %}
+<span style="border:1px solid green">{{tag}}</span>
+{% endfor %} -->
+<hr>
+<p>{{employee.role}}</p>
+<hr><p>{{employee.address}}</p>
+
+{% endblock content %}

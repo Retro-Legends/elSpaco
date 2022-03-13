@@ -1,0 +1,55 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<!-- <h1>Employee Form</h1> -->
+
+<!-- {% crispy form %} -->
+
+<form action="" method="POST">
+  {% csrf_token %}
+  {{ form|as_crispy_errors }}
+  <div class="form-row">
+    <div class="form-group col-md-6 mb-0">
+      {{ form.firstName|as_crispy_field }}
+    </div>
+    <div class="form-group col-md-6 mb-0">
+      {{ form.lastName|as_crispy_field }}
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-4 mb-0">
+      {{ form.address|as_crispy_field }}
+    </div>
+    <div class="form-group col-md-2 mb-0">
+      {{ form.desk|as_crispy_field }}
+    </div>
+  </div>
+      <div class="form-row">
+        <div class="form-group col-md-2 mb-0">
+          {{ form.role|as_crispy_field }}
+        </div>
+        <div class="form-group col-md-2 mb-0">
+          {{ form.gender|as_crispy_field }}
+        </div>
+        <div class="form-group col-md-2 mb-0">
+          {{ form.birthDate|as_crispy_field }}
+        </div>
+        <div class="form-group col-md-3 mb-0">
+          {{ form.nationality|as_crispy_field }}
+        </div>
+        <div class="form-group col-md-2 mb-0">
+          {{ form.isActive|as_crispy_field }}
+        </div>
+      </div>
+      
+          <input type="submit" class="btn btn-success">
+      
+      
+    </div>
+
+  </form> 
+
+
+{% endblock content%}

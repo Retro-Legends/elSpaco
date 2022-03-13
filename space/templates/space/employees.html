@@ -1,0 +1,39 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h1>Angajati</h1>
+<hr>
+<a href="{% url 'create-employee' %}">Adauga Angajat</a>
+<hr>
+
+<table>
+    <tr>
+        <th>Cod</th>
+        <th>Prenume</th>
+        <th>Nume</th>
+        <th>Rol</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+
+    </tr>
+    {% for employee in employees %}
+    <tr>
+        <td>{{employee.idEmployee}}</td>
+        <td>{{employee.firstName}}</td>
+        <td>{{employee.lastName}}</td>
+        <td>{{employee.role}}</td>
+        <td>|</td>
+        <td><a href="{% url 'update-employee' employee.idEmployee %}" >Editare</a></td>
+        <td><a href="{% url 'delete-employee' employee.idEmployee %}" >Stergere</a></td>
+        <td><a href="{% url 'employee' employee.idEmployee %}" target="_blank">Vizualizare</a></td>
+    </tr>
+    
+
+    {% endfor %}
+
+</table>
+
+{% endblock content %}

@@ -1,0 +1,10 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    <p>Sunteti sigur ca doriti sa stergeti "{{object}}"?</p>
+    <a href="{% url 'desks' %}">Inapoi</a>
+    <input type="submit" value="Confirma">
+</form>
+{% endblock %}

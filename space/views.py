@@ -1,13 +1,13 @@
 from django import http
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse
+from django.http.response import HttpResponse, JsonResponse
 from .models import Cladire, Office, Desk, Employee, Remote
 from .forms import CladireForm, OfficeForm, DeskForm, EmployeeForm, RemoteForm
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from rest_framework import status
-from .serializers import *
+from .serializers import CladireSerializer, OfficeSerializer, DeskSerializer, EmployeeSerializer, RemoteSerializer
 
 
 def index(request):
@@ -324,11 +324,22 @@ def apiDesks(request):
     return Response(serializer.data)
 
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def apiEmployees(request):
-    employees = Employee.objects.all()
-    serializer = EmployeeSerializer(employees, many=True)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        employees = Employee.objects.all()
+        serializer = EmployeeSerializer(employees, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        employee_serializer = EmployeeSerializer(data=request.data)
+        # print(request.data)
+        # employee_data = JSONParser().parse(request)
+        # employee_serializer = EmployeeSerializer(data=employee_data)
+        if employee_serializer.is_valid():
+            employee_serializer.save()
+            return JsonResponse(employee_serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(employee_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET'])
@@ -342,7 +353,7 @@ def apiRemotes(request):
 # ~~
 
 
-@api_view(['GET', 'POST', 'DELETE'])
+@api_view(['GET', 'PUT', 'DELETE'])
 def apiCladire(request, pk):
     try:
         cladire = Cladire.objects.get(codCladire=pk)
@@ -353,7 +364,7 @@ def apiCladire(request, pk):
         serializer = CladireSerializer(cladire, many=False)
         return JsonResponse(serializer.data)
 
-    elif request.method == 'POST':
+    elif request.method == 'PUT':
         cladire_data = JSONParser().parse(request)
         serializer = CladireSerializer(cladire, data=cladire_data)
         if serializer.is_valid():
@@ -366,7 +377,7 @@ def apiCladire(request, pk):
         return JsonResponse({'message': 'Cladire was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
 
 
-@api_view(['GET', 'POST', 'DELETE'])
+@api_view(['GET', 'PUT', 'DELETE'])
 def apiOffice(request, pk):
     try:
         office = Office.objects.get(idOffice=pk)
@@ -377,7 +388,7 @@ def apiOffice(request, pk):
         serializer = OfficeSerializer(office, many=False)
         return JsonResponse(serializer.data)
 
-    elif request.method == 'POST':
+    elif request.method == 'PUT':
         office_data = JSONParser().parse(request)
         serializer = OfficeSerializer(office, data=office_data)
         if serializer.is_valid():
@@ -390,7 +401,7 @@ def apiOffice(request, pk):
         return JsonResponse({'message': 'Office was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
 
 
-@api_view(['GET', 'POST', 'DELETE'])
+@api_view(['GET', 'PUT', 'DELETE'])
 def apiDesk(request, pk):
     try:
         desk = Desk.objects.get(idDesk=pk)
@@ -401,7 +412,7 @@ def apiDesk(request, pk):
         serializer = DeskSerializer(desk, many=False)
         return JsonResponse(serializer.data)
 
-    elif request.method == 'POST':
+    elif request.method == 'PUT':
         desk_data = JSONParser().parse(request)
         serializer = DeskSerializer(desk, data=desk_data)
         if serializer.is_valid():
@@ -414,7 +425,7 @@ def apiDesk(request, pk):
         return JsonResponse({'message': 'Desk was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
 
 
-@api_view(['GET', 'POST', 'DELETE'])
+@api_view(['GET', 'PUT', 'DELETE'])
 def apiEmployee(request, pk):
     try:
         employee = Employee.objects.get(idEmployee=pk)
@@ -425,7 +436,7 @@ def apiEmployee(request, pk):
         serializer = EmployeeSerializer(employee, many=False)
         return JsonResponse(serializer.data)
 
-    elif request.method == 'POST':
+    elif request.method == 'PUT':
         employee_data = JSONParser().parse(request)
         serializer = EmployeeSerializer(employee, data=employee_data)
         if serializer.is_valid():
@@ -438,7 +449,7 @@ def apiEmployee(request, pk):
         return JsonResponse({'message': 'Employee was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
 
 
-@api_view(['GET', 'POST', 'DELETE'])
+@api_view(['GET', 'PUT', 'DELETE'])
 def apiRemote(request, pk):
     try:
         remote = Remote.objects.get(idRemote=pk)
@@ -449,7 +460,7 @@ def apiRemote(request, pk):
         serializer = RemoteSerializer(remote, many=False)
         return JsonResponse(serializer.data)
 
-    elif request.method == 'POST':
+    elif request.method == 'PUT':
         remote_data = JSONParser().parse(request)
         serializer = RemoteSerializer(remote, data=remote_data)
         if serializer.is_valid():

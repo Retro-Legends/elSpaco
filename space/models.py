@@ -44,15 +44,15 @@ class Desk(models.Model):
 
 class Employee(models.Model):
     STATUS = [
-        ('MALE', 'Male'),
-        ('FEMALE', 'Female'),
-        ('NONBINARY', 'Nonbinary'),
+        ('male', 'male'),
+        ('female', 'female'),
+        ('nonbinary', 'nonbinary'),
     ]
 
     ROLES = [
-        ('ADMIN', 'Admin'),
-        ('OFFICEADMIN', 'Ofice Admin'),
-        ('USER', 'User'),
+        ('admin', 'admin'),
+        ('officeadmin', 'oficeadmin'),
+        ('user', 'user'),
     ]
     idEmployee = models.AutoField(primary_key=True)
     firstName = models.CharField(max_length=50, null=False, blank=False)

@@ -303,25 +303,49 @@ def deleteRemote(request, pk):
 # ~~
 
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def apiCladiri(request):
-    cladiri = Cladire.objects.all()
-    serializer = CladireSerializer(cladiri, many=True)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        cladiri = Cladire.objects.all()
+        serializer = CladireSerializer(cladiri, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        cladire_serializer = CladireSerializer(data=request.data)
+        if cladire_serializer.is_valid():
+            cladire_serializer.save()
+            return JsonResponse(cladire_serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(cladire_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def apiOffices(request):
-    offices = Office.objects.all()
-    serializer = OfficeSerializer(offices, many=True)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        offices = Office.objects.all()
+        serializer = OfficeSerializer(offices, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        office_serializer = OfficeSerializer(data=request.data)
+        if office_serializer.is_valid():
+            office_serializer.save()
+            return JsonResponse(office_serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(office_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def apiDesks(request):
-    desks = Desk.objects.all()
-    serializer = DeskSerializer(desks, many=True)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        desks = Desk.objects.all()
+        serializer = DeskSerializer(desks, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        desk_serializer = DeskSerializer(data=request.data)
+        if desk_serializer.is_valid():
+            desk_serializer.save()
+            return JsonResponse(desk_serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(desk_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET', 'POST'])
@@ -342,11 +366,19 @@ def apiEmployees(request):
         return JsonResponse(employee_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def apiRemotes(request):
-    remotes = Remote.objects.all()
-    serializer = RemoteSerializer(remotes, many=True)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        remotes = Remote.objects.all()
+        serializer = RemoteSerializer(remotes, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        remote_serializer = RemoteSerializer(data=request.data)
+        if remote_serializer.is_valid():
+            remote_serializer.save()
+            return JsonResponse(remote_serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(remote_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # ~~
 # ~~ API SELECTIV
@@ -365,12 +397,11 @@ def apiCladire(request, pk):
         return JsonResponse(serializer.data)
 
     elif request.method == 'PUT':
-        cladire_data = JSONParser().parse(request)
-        serializer = CladireSerializer(cladire, data=cladire_data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        cladire_serializer = CladireSerializer(data=request.data)
+        if cladire_serializer.is_valid():
+            cladire_serializer.save()
+            return JsonResponse(cladire_serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(cladire_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
         cladire.delete()
@@ -389,12 +420,11 @@ def apiOffice(request, pk):
         return JsonResponse(serializer.data)
 
     elif request.method == 'PUT':
-        office_data = JSONParser().parse(request)
-        serializer = OfficeSerializer(office, data=office_data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        office_serializer = OfficeSerializer(data=request.data)
+        if office_serializer.is_valid():
+            office_serializer.save()
+            return JsonResponse(office_serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(office_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
         office.delete()
@@ -413,12 +443,11 @@ def apiDesk(request, pk):
         return JsonResponse(serializer.data)
 
     elif request.method == 'PUT':
-        desk_data = JSONParser().parse(request)
-        serializer = DeskSerializer(desk, data=desk_data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        desk_serializer = DeskSerializer(data=request.data)
+        if desk_serializer.is_valid():
+            desk_serializer.save()
+            return JsonResponse(desk_serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(desk_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
         desk.delete()
@@ -437,12 +466,11 @@ def apiEmployee(request, pk):
         return JsonResponse(serializer.data)
 
     elif request.method == 'PUT':
-        employee_data = JSONParser().parse(request)
-        serializer = EmployeeSerializer(employee, data=employee_data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        employee_serializer = EmployeeSerializer(data=request.data)
+        if employee_serializer.is_valid():
+            employee_serializer.save()
+            return JsonResponse(employee_serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(employee_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
         employee.delete()
@@ -461,12 +489,11 @@ def apiRemote(request, pk):
         return JsonResponse(serializer.data)
 
     elif request.method == 'PUT':
-        remote_data = JSONParser().parse(request)
-        serializer = RemoteSerializer(remote, data=remote_data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        remote_serializer = RemoteSerializer(data=request.data)
+        if remote_serializer.is_valid():
+            remote_serializer.save()
+            return JsonResponse(remote_serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(remote_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
         remote.delete()

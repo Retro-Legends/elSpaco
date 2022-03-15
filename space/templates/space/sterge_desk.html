@@ -3,8 +3,8 @@
 {% block content %}
 <form method="POST">
     {% csrf_token %}
-    <p>Sunteti sigur ca doriti sa stergeti "{{object}}"?</p>
-    <a href="{% url 'desks' %}">Inapoi</a>
-    <input type="submit" value="Confirma">
+    <strong><p>Sunteti sigur ca doriti sa stergeti "{{object}}"?</p></strong>
+    <a href="{% url 'desks' %}" class="btn btn-warning pull-right">Inapoi</a>
+    <input type="submit" value="Confirma" class="btn btn-info">
 </form>
 {% endblock %}

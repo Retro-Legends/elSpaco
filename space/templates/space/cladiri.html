@@ -2,16 +2,16 @@
 
 {% block content %}
 
-<h1>Cladiri</h1>
+<h1>Buildings</h1>
 <hr>
-<a href="{% url 'create-cladire' %}">Adauga Cladire</a>
+<a href="{% url 'create-cladire' %}" class="btn btn-primary">Add Building</a>
 <hr>
 
 <table>
     <tr>
         <th>Cod</th>
-        <th>Denumire</th>
-        <th>Nr etaje</th>
+        <th>Name</th>
+        <th>Floors</th>
         <th></th>
         <th></th>
         
@@ -21,9 +21,9 @@
         <td>{{cladire.codCladire}}</td>
         <td>{{cladire.denCladire}}</td>
         <td>{{cladire.nrEtaje}}</td>
-        <td><a href="{% url 'update-cladire' cladire.codCladire %}" >Editare</a></td>
-        <td><a href="{% url 'delete-cladire' cladire.codCladire %}" >Stergere</a></td>
-        <td><a href="{% url 'cladire' cladire.codCladire %}" target="_blank">Vizualizare</a></td>
+        <td><a href="{% url 'update-cladire' cladire.codCladire %}" class="btn btn-warning pull-right">Edit</a></td>
+        <td><a href="{% url 'delete-cladire' cladire.codCladire %}" class="btn btn-danger">Delete</a></td>
+        <td><a href="{% url 'cladire' cladire.codCladire %}" class="btn btn-info" target="_blank">View</a></td>
     </tr>
     
 

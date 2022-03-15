@@ -2,17 +2,17 @@
 
 {% block content %}
 
-<h1>Birouri</h1>
+<h1>Offices</h1>
 <hr>
-<a href="{% url 'create-birou' %}">Adauga Birou</a>
+<a href="{% url 'create-birou' %}" class="btn btn-primary">Add Office</a>
 <hr>
 
 <table>
     <tr>
         <th>Cod</th>
-        <th>Denumire</th>
-        <th>Nr etaje</th>
-        <th>Cladire</th>
+        <th>Name</th>
+        <th>Floors</th>
+        <th>Building</th>
         <th></th>
         <th></th>
         <th></th>
@@ -26,9 +26,9 @@
         <td>{{birou.floor}}</td>
         <td>{{birou.building}}</td>
         <td>|</td>
-        <td><a href="{% url 'update-birou' birou.idOffice %}" >Editare</a></td>
-        <td><a href="{% url 'delete-birou' birou.idOffice %}" >Stergere</a></td>
-        <td><a href="{% url 'birou' birou.idOffice %}" target="_blank">Vizualizare</a></td>
+        <td><a href="{% url 'update-birou' birou.idOffice %}" class="btn btn-warning pull-right" >Edit</a></td>
+        <td><a href="{% url 'delete-birou' birou.idOffice %}" class="btn btn-danger" >Delete</a></td>
+        <td><a href="{% url 'birou' birou.idOffice %}" class="btn btn-info" target="_blank">View</a></td>
     </tr>
     
 

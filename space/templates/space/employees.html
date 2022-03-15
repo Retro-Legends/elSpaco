@@ -2,17 +2,17 @@
 
 {% block content %}
 
-<h1>Angajati</h1>
+<h1>Employees</h1>
 <hr>
-<a href="{% url 'create-employee' %}">Adauga Angajat</a>
+<a href="{% url 'create-employee' %}"class="btn btn-primary">Add Employee</a>
 <hr>
 
 <table>
     <tr>
         <th>Cod</th>
-        <th>Prenume</th>
-        <th>Nume</th>
-        <th>Rol</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Role</th>
         <th></th>
         <th></th>
         <th></th>
@@ -26,9 +26,9 @@
         <td>{{employee.lastName}}</td>
         <td>{{employee.role}}</td>
         <td>|</td>
-        <td><a href="{% url 'update-employee' employee.idEmployee %}" >Editare</a></td>
-        <td><a href="{% url 'delete-employee' employee.idEmployee %}" >Stergere</a></td>
-        <td><a href="{% url 'employee' employee.idEmployee %}" target="_blank">Vizualizare</a></td>
+        <td><a href="{% url 'update-employee' employee.idEmployee %}" class="btn btn-warning pull-right">Edit</a></td>
+        <td><a href="{% url 'delete-employee' employee.idEmployee %}" class="btn btn-danger">Delete</a></td>
+        <td><a href="{% url 'employee' employee.idEmployee %}" class="btn btn-info" target="_blank">View</a></td>
     </tr>
     
 

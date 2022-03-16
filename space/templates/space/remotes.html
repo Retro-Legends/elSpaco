@@ -4,7 +4,7 @@
 
 <h1>Remotes</h1>
 <hr>
-<a href="{% url 'create-remote' %}" class="btn btn-primary">Add Remote</a>
+<a href="{% url 'create-remote' %}" class="btn btn-outline-primary">Add Remote</a>
 <hr>
 
 <table>
@@ -24,9 +24,9 @@
         <td>{{remote.employee}}</td>
         <td>{{employee.startDate}}</td>
         <td>|</td>
-        <td><a href="{% url 'update-remote' remote.idRemote %}" class="btn btn-warning pull-right">Edit</a></td>
-        <td><a href="{% url 'delete-remote' remote.idRemote %}" class="btn btn-danger">Delete</a></td>
-        <td><a href="{% url 'remote' remote.idRemote %}" class="btn btn-info" target="_blank">View</a></td>
+        <td><a href="{% url 'update-remote' remote.idRemote %}" class="btn btn-outline-warning pull-right">Edit</a></td>
+        <td><a href="{% url 'delete-remote' remote.idRemote %}" class="btn btn-outline-danger">Delete</a></td>
+        <td><a href="{% url 'remote' remote.idRemote %}" class="btn btn-outline-info" target="_blank">View</a></td>
     </tr>
     
 

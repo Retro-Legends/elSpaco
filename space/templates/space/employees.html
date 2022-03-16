@@ -4,7 +4,7 @@
 
 <h1>Employees</h1>
 <hr>
-<a href="{% url 'create-employee' %}"class="btn btn-primary">Add Employee</a>
+<a href="{% url 'create-employee' %}"class="btn btn-outline-primary">Add Employee</a>
 <hr>
 
 <table>
@@ -26,9 +26,9 @@
         <td>{{employee.lastName}}</td>
         <td>{{employee.role}}</td>
         <td>|</td>
-        <td><a href="{% url 'update-employee' employee.idEmployee %}" class="btn btn-warning pull-right">Edit</a></td>
-        <td><a href="{% url 'delete-employee' employee.idEmployee %}" class="btn btn-danger">Delete</a></td>
-        <td><a href="{% url 'employee' employee.idEmployee %}" class="btn btn-info" target="_blank">View</a></td>
+        <td><a href="{% url 'update-employee' employee.idEmployee %}" class="btn btn-outline-warning pull-right">Edit</a></td>
+        <td><a href="{% url 'delete-employee' employee.idEmployee %}" class="btn btn-outline-danger">Delete</a></td>
+        <td><a href="{% url 'employee' employee.idEmployee %}" class="btn btn-outline-info" target="_blank">View</a></td>
     </tr>
     
 

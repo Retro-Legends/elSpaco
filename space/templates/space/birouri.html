@@ -4,7 +4,7 @@
 
 <h1>Offices</h1>
 <hr>
-<a href="{% url 'create-birou' %}" class="btn btn-primary">Add Office</a>
+<a href="{% url 'create-birou' %}" class="btn btn-outline-primary ">Add Office</a>
 <hr>
 
 <table>
@@ -26,9 +26,9 @@
         <td>{{birou.floor}}</td>
         <td>{{birou.building}}</td>
         <td>|</td>
-        <td><a href="{% url 'update-birou' birou.idOffice %}" class="btn btn-warning pull-right" >Edit</a></td>
-        <td><a href="{% url 'delete-birou' birou.idOffice %}" class="btn btn-danger" >Delete</a></td>
-        <td><a href="{% url 'birou' birou.idOffice %}" class="btn btn-info" target="_blank">View</a></td>
+        <td><a href="{% url 'update-birou' birou.idOffice %}" class="btn btn-outline-warning pull-right" >Edit</a></td>
+        <td><a href="{% url 'delete-birou' birou.idOffice %}" class="btn btn-outline-danger" >Delete</a></td>
+        <td><a href="{% url 'birou' birou.idOffice %}" class="btn btn-outline-info" target="_blank">View</a></td>
     </tr>
     
 

@@ -4,7 +4,7 @@
 
 <h1>Desks</h1>
 <hr>
-<a href="{% url 'create-desk' %}" class="btn btn-primary">Add Desk</a>
+<a href="{% url 'create-desk' %}" class="btn btn-outline-primary">Add Desk</a>
 <hr>
 
 <table>
@@ -24,9 +24,9 @@
         <td>{{desk.office}}</td>
         <td>{{desk.deskCount}}</td>
         <td>|</td>
-        <td><a href="{% url 'update-desk' desk.idDesk %}" class="btn btn-warning pull-right">Edit</a></td>
-        <td><a href="{% url 'delete-desk' desk.idDesk %}" class="btn btn-danger">Delete</a></td>
-        <td><a href="{% url 'desk' desk.idDesk %}" class="btn btn-info"target="_blank">View</a></td>
+        <td><a href="{% url 'update-desk' desk.idDesk %}" class="btn btn-outline-warning pull-right">Edit</a></td>
+        <td><a href="{% url 'delete-desk' desk.idDesk %}" class="btn btn-outline-danger">Delete</a></td>
+        <td><a href="{% url 'desk' desk.idDesk %}" class="btn btn-outline-info"target="_blank">View</a></td>
     </tr>
     
 

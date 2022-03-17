@@ -61,8 +61,8 @@ class OfficeForm(ModelForm):
             'building': ('Building'),
             'deskCount': ('Desk Count'),
             'adminOffice': ('Administrator'),
-            'lengthOffice': ('Length - cm'),
-            'widthOffice': ('Width - cm')
+            'lengthOffice': ('Length: cm'),
+            'widthOffice': ('Width: cm')
         }
 
     @property
@@ -91,8 +91,8 @@ class DeskForm(ModelForm):
             'office': ('Office'),
             'deskCount': ('Desk count'),
             'adminOffice': ('Admin'),
-            'lengthDesk': ('Length - cm'),
-            'widthDesk': ('Width - cm'),
+            'lengthDesk': ('Length: cm'),
+            'widthDesk': ('Width: cm'),
             'isOccupied': ('Occupied')
         }
 
@@ -115,13 +115,13 @@ class EmployeeForm(ModelForm):
     class Meta:
         model = Employee
         fields = ('firstName', 'lastName', 'role', 'gender',
-                  'birthDate - yyyy-mm-dd', 'nationality', 'address', 'desk',  'isActive')
+                  'birthDate', 'nationality', 'address', 'desk',  'isActive')
         labels = {
             'firstName': ('First name'),
             'lastName': ('Last name'),
             'role': ('Role'),
             'gender': ('Gender'),
-            'birthDate': ('Birth date'),
+            'birthDate': ('Birth date: yyyy-mm-dd'),
             'nationality': ('nationality'),
             'address': ('Address'),
             'desk': ('Desk'),
@@ -150,12 +150,12 @@ class EmployeeForm(ModelForm):
 class RemoteForm(ModelForm):
     class Meta:
         model = Remote
-        fields = ('employee', 'startDate - yyyy-mm-dd', 'duration - days',
+        fields = ('employee', 'startDate', 'duration',
                   'isApproved', 'approvedBy')
         labels = {
             'employee': ('Employee'),
-            'startDate': ('Start Date'),
-            'duration': ('Duration'),
+            'startDate': ('Start Date: yyyy-mm-dd'),
+            'duration': ('Duration: days'),
             'isApproved': ('Approved'),
             'approvedBy': ('Approved By')
         }

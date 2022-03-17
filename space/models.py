@@ -6,10 +6,10 @@ import uuid
 
 class Cladire(models.Model):
     codCladire = models.AutoField(primary_key=True)
-    denCladire = models.CharField(max_length=30)
+    denCladire = models.CharField(max_length=30, null=False, blank=False)
     # verbose_name=('Denumire') - pentru denumire
-    adresaCladire = models.CharField(max_length=200)
-    nrEtaje = models.IntegerField()
+    adresaCladire = models.CharField(max_length=200, null=False, blank=False)
+    nrEtaje = models.IntegerField(null=False, blank=False)
     # nrBirouri = models.IntegerField()
 
     def __str__(self) -> str:
@@ -19,27 +19,34 @@ class Cladire(models.Model):
 class Office(models.Model):
     idOffice = models.AutoField(primary_key=True)
     nameOffice = models.CharField(max_length=30)
-    floor = models.IntegerField(null=True, blank=True)
-    building = models.ForeignKey('Cladire', on_delete=models.CASCADE)
-    deskCount = models.IntegerField(null=True, blank=True)
+    floor = models.IntegerField(null=False, blank=False)
+    building = models.ForeignKey(
+        'Cladire', on_delete=models.CASCADE, null=False, blank=False)
+    deskCount = models.IntegerField(null=False, blank=False)
     usedDesks = models.IntegerField(null=True, blank=True)
     adminOffice = models.CharField(max_length=30, null=True, blank=True)
-    lengthOffice = models.IntegerField(null=True, blank=True)
-    widthOffice = models.IntegerField(null=True, blank=True)
+    lengthOffice = models.IntegerField(null=False, blank=False)
+    widthOffice = models.IntegerField(null=False, blank=False)
 
     def __str__(self) -> str:
         return self.nameOffice
 
 
 class Desk(models.Model):
+    ROLES = [
+        ('admin', 'admin'),
+        ('officeadmin', 'oficeadmin'),
+    ]
     idDesk = models.AutoField(primary_key=True)
-    office = models.ForeignKey('Office', on_delete=models.CASCADE)
-    deskCount = models.IntegerField(null=True, blank=True)
+    office = models.ForeignKey(
+        'Office', on_delete=models.CASCADE, null=False, blank=False)
+    deskCount = models.IntegerField(null=False, blank=False)
     usedDesks = models.IntegerField(null=True, blank=True)
-    adminOffice = models.CharField(max_length=30, null=True, blank=True)
-    lengthDesk = models.IntegerField(null=True, blank=True)
-    widthDesk = models.IntegerField(null=True, blank=True)
-    isOccupied = models.BooleanField()
+    adminOffice = models.CharField(
+        max_length=30, null=False, blank=False, choices=ROLES)
+    lengthDesk = models.IntegerField(null=False, blank=False)
+    widthDesk = models.IntegerField(null=False, blank=False)
+    isOccupied = models.BooleanField(null=False, blank=False)
 
 
 class Employee(models.Model):
@@ -58,14 +65,15 @@ class Employee(models.Model):
     firstName = models.CharField(max_length=50, null=False, blank=False)
     lastName = models.CharField(max_length=50, null=False, blank=False)
     role = models.CharField(
-        max_length=50, choices=ROLES, null=True, blank=True)
+        max_length=50, choices=ROLES, null=False, blank=False)
     gender = models.CharField(
-        max_length=20, choices=STATUS, null=True, blank=True)
-    desk = models.ForeignKey('Desk', on_delete=models.CASCADE)
-    birthDate = models.DateField(null=True, blank=True)
-    nationality = models.CharField(max_length=50, null=True, blank=True)
-    address = models.CharField(max_length=200, null=True, blank=True)
-    isActive = models.BooleanField()
+        max_length=20, choices=STATUS, null=False, blank=False)
+    desk = models.ForeignKey(
+        'Desk', on_delete=models.CASCADE, null=False, blank=False)
+    birthDate = models.DateField(null=False, blank=False)
+    nationality = models.CharField(max_length=50, null=False, blank=False)
+    address = models.CharField(max_length=200, null=False, blank=False)
+    isActive = models.BooleanField(null=False, blank=False)
 
     def __str__(self) -> str:
         return self.firstName + " " + self.lastName
@@ -73,8 +81,10 @@ class Employee(models.Model):
 
 class Remote(models.Model):
     idRemote = models.AutoField(primary_key=True)
-    employee = models.ForeignKey('Employee', on_delete=models.CASCADE)
-    startDate = models.DateField(null=True, blank=True)
-    duration = models.IntegerField(null=True, blank=True)
+    employee = models.ForeignKey(
+        'Employee', on_delete=models.CASCADE, null=False, blank=False)
+    startDate = models.DateField(null=False, blank=False)
+    duration = models.IntegerField(null=False, blank=False)
     isApproved = models.BooleanField()
-    approvedBy = models.CharField(max_length=30, choices=Employee.ROLES)
+    approvedBy = models.CharField(
+        max_length=30, choices=Employee.ROLES, null=False, blank=False)

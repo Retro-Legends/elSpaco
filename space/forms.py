@@ -61,8 +61,8 @@ class OfficeForm(ModelForm):
             'building': ('Building'),
             'deskCount': ('Desk Count'),
             'adminOffice': ('Administrator'),
-            'lengthOffice': ('Length'),
-            'widthOffice': ('Width')
+            'lengthOffice': ('Length - cm'),
+            'widthOffice': ('Width - cm')
         }
 
     @property
@@ -91,8 +91,8 @@ class DeskForm(ModelForm):
             'office': ('Office'),
             'deskCount': ('Desk count'),
             'adminOffice': ('Admin'),
-            'lengthDesk': ('Length'),
-            'widthDesk': ('Width'),
+            'lengthDesk': ('Length - cm'),
+            'widthDesk': ('Width - cm'),
             'isOccupied': ('Occupied')
         }
 
@@ -115,7 +115,7 @@ class EmployeeForm(ModelForm):
     class Meta:
         model = Employee
         fields = ('firstName', 'lastName', 'role', 'gender',
-                  'birthDate', 'nationality', 'address', 'desk',  'isActive')
+                  'birthDate - yyyy-mm-dd', 'nationality', 'address', 'desk',  'isActive')
         labels = {
             'firstName': ('First name'),
             'lastName': ('Last name'),
@@ -150,7 +150,7 @@ class EmployeeForm(ModelForm):
 class RemoteForm(ModelForm):
     class Meta:
         model = Remote
-        fields = ('employee', 'startDate', 'duration',
+        fields = ('employee', 'startDate - yyyy-mm-dd', 'duration - days',
                   'isApproved', 'approvedBy')
         labels = {
             'employee': ('Employee'),

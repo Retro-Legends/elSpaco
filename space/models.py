@@ -74,6 +74,7 @@ class Employee(models.Model):
     nationality = models.CharField(max_length=50, null=False, blank=False)
     address = models.CharField(max_length=200, null=False, blank=False)
     isActive = models.BooleanField(null=False, blank=False)
+    id = models.CharField(max_length=10, null=False, blank=False)
 
     def __str__(self) -> str:
         return self.firstName + " " + self.lastName

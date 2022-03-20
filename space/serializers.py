@@ -25,7 +25,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
         fields = ('idEmployee', 'firstName', 'lastName', 'role', 'gender',
-                  'birthDate', 'nationality', 'address', 'isActive', 'desk')
+                  'birthDate', 'nationality', 'address', 'isActive', 'desk', 'id')
 
 
 class RemoteSerializer(serializers.ModelSerializer):

@@ -115,7 +115,7 @@ class EmployeeForm(ModelForm):
     class Meta:
         model = Employee
         fields = ('firstName', 'lastName', 'role', 'gender',
-                  'birthDate', 'nationality', 'address', 'desk',  'isActive')
+                  'birthDate', 'nationality', 'address', 'desk',  'isActive', 'id')
         labels = {
             'firstName': ('First name'),
             'lastName': ('Last name'),
@@ -125,7 +125,9 @@ class EmployeeForm(ModelForm):
             'nationality': ('nationality'),
             'address': ('Address'),
             'desk': ('Desk'),
-            'isActive': ('Active')
+            'isActive': ('Active'),
+            'id': ('id'),
+
         }
 
     @property
@@ -142,6 +144,7 @@ class EmployeeForm(ModelForm):
             Field('address'),
             Field('desk'),
             Field('isActive'),
+            Field('id'),
             Submit('submit', 'Submit obiect', css_class='btn-success')
         )
         return helper
